@@ -5,3 +5,12 @@ tdsc: tap_dance_shift_caps {
     tapping-term-ms = <200>;
     bindings = <&kp LSHFT>, <&kp CAPS>;
 };
+
+bsp_del: mo_backspace_delete {
+    compatible = "zmk,behavior-mod-morph";
+    label = "BACKSPACE / DEL";
+    bindings = <&kp BACKSPACE>, <&kp DEL>;
+
+    #binding-cells = <0>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+};
