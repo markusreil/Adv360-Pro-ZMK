@@ -6,6 +6,14 @@ tdsc: tap_dance_shift_caps {
     bindings = <&kp LSHFT>, <&kp CAPS>;
 };
 
+td_kp: tap_dance_keypad {
+    compatible = "zmk,behavior-tap-dance";
+    label = "TD: Keypad";
+    #binding-cells = <0>;
+    tapping-term-ms = <200>;
+    bindings = <&mo 1>, <&tog 1>;
+};
+
 bsp_del: mo_backspace_delete {
     compatible = "zmk,behavior-mod-morph";
     label = "BACKSPACE / DEL";
