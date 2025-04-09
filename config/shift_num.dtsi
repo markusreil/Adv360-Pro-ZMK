@@ -1,0 +1,7 @@
+uns1: unshift_1 {
+  compatible = "zmk,behavior-mod-morph";
+  label = "Unshift 1-!";
+  bindings = <&kp LS(N1)>, <&kp N1>;
+  #binding-cells = <0>;
+  mods = <(MOD_LSFT|MOD_RSFT)>;
+};
