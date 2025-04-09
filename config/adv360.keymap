@@ -10,7 +10,7 @@
     behaviors {
       #include "macros.dtsi"
       #include "version.dtsi"
-      #include "behaviours.dtsi"
+      #include "behaviors.dtsi"
       #include "shift_num.dtsi"
 
       hm: homerow_mods {
