@@ -7,11 +7,173 @@
 #include <dt-bindings/zmk/pointing.h>
 
 / {
+
+    macros {
+        #include "version.dtsi"
+
+      macro_quotes: macro_quotes {
+        compatible = "zmk,behavior-macro";
+        display-name = "macro_quotes";
+        #binding-cells = <0>;
+        bindings = <&kp SQT>, <&kp SQT>, <&kp LEFT>;
+      };
+
+      macro_dquotes: macro_dquotes {
+        compatible = "zmk,behavior-macro";
+        display-name = "macro_dquotes";
+        #binding-cells = <0>;
+        bindings = <&kp DQT>, <&kp DQT>, <&kp LEFT>;
+      };
+
+      macro_braces: macro_braces {
+        compatible = "zmk,behavior-macro";
+        display-name = "macro_braces";
+        #binding-cells = <0>;
+        bindings = <&kp LBRC>, <&kp RBRC>, <&kp LEFT>;
+      };
+
+      macro_parens: macro_parens {
+        compatible = "zmk,behavior-macro";
+        display-name = "macro_parens";
+        #binding-cells = <0>;
+        bindings = <&kp LPAR>, <&kp RPAR>, <&kp LEFT>;
+      };
+
+      macro_brackets: macro_brackets {
+        compatible = "zmk,behavior-macro";
+        display-name = "macro_brackets";
+        #binding-cells = <0>;
+        bindings = <&kp LBKT>, <&kp RBKT>, <&kp LEFT>;
+      };
+
+      macro_kinesis: macro_kinesis {
+        compatible = "zmk,behavior-macro";
+        display-name = "macro_kinesis";
+        #binding-cells = <0>;
+        bindings = <&kp LS(K)>, <&kp I>, <&kp N>, <&kp E>, <&kp S>, <&kp I>, <&kp S>;
+      };
+
+      Win_Cut: Windows_Cut {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LC(X)>;
+        display-name = "Windows Cut";
+      };
+
+      Win_Copy: Windows_Copy {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LC(C)>;
+        display-name = "Windows Copy";
+      };
+
+      Win_Paste: Windows_Paste {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LC(V)>;
+        display-name = "Windows Paste";
+      };
+
+      Win_Select_All: Windows_SelectAll {
+          compatible = "zmk,behavior-macro";
+          #binding-cells = <0>;
+          bindings = <&kp LC(A)>;
+          display-name = "Windows Select All";
+      };
+
+      Win_Undo: Windows_Undo {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LC(Z)>;
+        display-name = "Windows Undo";
+      };
+
+      Win_Desktop: Win_Desk {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LG(D)>;
+        display-name = "Windows Desktop";
+      };
+
+      Win_File_Explorer: Win_Explr {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LG(E)>;
+        display-name = "Windows Explorer";
+      };
+
+      Win_Snip_Tool: Win_Snip {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LS(LG(S))>;
+        display-name = "Windows Screen Snip";
+      };
+
+      Win_Show_All_Windows: Win_ShowAW {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LG(TAB)>;
+        display-name = "Windows Show All Windows";
+      };
+
+      Win_Close_Program: Win_Close_Program {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LA(F4)>;
+        display-name = "Windows Close";
+      };
+
+      Win_Settings_Menu: Win_Settings_Menu {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LG(I)>;
+        display-name = "Windows Settings";
+      };
+
+      Win_Lock_PC: Win_Lock_PC {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LG(L)>;
+        display-name = "Windows Lock";
+      };
+
+      Win_Tile_Left: Win_Tile_Left {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LG(LEFT)>;
+        display-name = "Windows Tile Left";
+      };
+
+      Win_Tile_Up: Win_Tile_Up {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LG(UP_ARROW)>;
+        display-name = "Windows Tile Up";
+      };
+
+      Win_Tile_Down: Win_Tile_Down {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LG(DOWN)>;
+        display-name = "Windows Tile Down";
+      };
+
+      Win_Tile_Right: Win_Tile_Right {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LG(RIGHT)>;
+        display-name = "Windows Tile Right";
+      };
+
+      Double_Click: Double_Click {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&mkp MB1 &mkp MB1>;
+        display-name = "Double Click";
+      };
+    };
+
     behaviors {
-      #include "macros.dtsi"
-      #include "version.dtsi"
-      #include "behaviors.dtsi"
-      #include "shift_num.dtsi"
 
       hm: homerow_mods {
           compatible = "zmk,behavior-hold-tap";
@@ -22,6 +184,128 @@
           flavor = "balanced";
           bindings = <&kp>, <&kp>;
       };
+
+tdsc: tap_dance_shift_caps {
+    compatible = "zmk,behavior-tap-dance";
+    display-name = "TD: Shift, Capslock";
+    #binding-cells = <0>;
+    tapping-term-ms = <200>;
+    bindings = <&kp LSHFT>, <&kp CAPS>;
+};
+
+td_kp: tap_dance_keypad {
+    compatible = "zmk,behavior-tap-dance";
+    display-name = "TD: Keypad";
+    #binding-cells = <0>;
+    tapping-term-ms = <200>;
+    bindings = <&mo 1>, <&tog 1>;
+};
+
+bsp_del: mo_backspace_delete {
+    compatible = "zmk,behavior-mod-morph";
+    display-name = "BACKSPACE / DEL";
+    bindings = <&kp BACKSPACE>, <&kp DEL>;
+
+    #binding-cells = <0>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+};
+
+// Double quotes
+uns_quote: unshift_quote {
+  compatible = "zmk,behavior-mod-morph";
+  display-name = "UNSHIFT QUOTE";
+  bindings = <&kp DQT>, <&kp APOS>;
+  #binding-cells = <0>;
+  mods = <(MOD_LSFT|MOD_RSFT)>;
+};
+
+td_quote: tap_dance_quote {
+    compatible = "zmk,behavior-tap-dance";
+    display-name = "TD: Quote";
+    #binding-cells = <0>;
+    tapping-term-ms = <200>;
+    bindings = <&uns_quote>, <&macro_dquotes>;
+};
+
+    uns1: unshift_1 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 1-!";
+      bindings = <&kp LS(N1)>, <&kp N1>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    uns2: unshift_2 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 2-@";
+      bindings = <&kp LS(N2)>, <&kp N2>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    uns3: unshift_3 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 3-#";
+      bindings = <&kp LS(N3)>, <&kp N3>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    uns4: unshift_4 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 4-$";
+      bindings = <&kp LS(N4)>, <&kp N4>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    uns5: unshift_5 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 5-%";
+      bindings = <&kp LS(N5)>, <&kp N5>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    uns6: unshift_6 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 6-^";
+      bindings = <&kp LS(N6)>, <&kp N6>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    uns7: unshift_7 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 7-&";
+      bindings = <&kp LS(N7)>, <&kp N7>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    uns8: unshift_8 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 8-*";
+      bindings = <&kp LS(N8)>, <&kp N8>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    uns9: unshift_9 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 9-(";
+      bindings = <&kp LS(N9)>, <&kp N9>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    uns0: unshift_0 {
+      compatible = "zmk,behavior-mod-morph";
+      display-name = "UNSHIFT 0-)";
+      bindings = <&kp LS(N0)>, <&kp N0>;
+      #binding-cells = <0>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
     };
 
   keymap {
