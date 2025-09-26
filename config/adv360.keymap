@@ -20,14 +20,7 @@
             compatible = "zmk,behavior-macro";
             display-name = "macro_quotes";
             #binding-cells = <0>;
-            bindings = <&kp SQT &kp SQT &kp LEFT>;
-        };
-
-        macro_dquotes: macro_dquotes {
-            compatible = "zmk,behavior-macro";
-            display-name = "macro_dquotes";
-            #binding-cells = <0>;
-            bindings = <&kp DQT &kp DQT &kp LEFT>;
+            bindings = <&fl_quote &fl_quote &ns_left>;
         };
 
         macro_braces: macro_braces {
@@ -130,7 +123,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "BACKSPACE / DEL";
             bindings = <&kp BACKSPACE>, <&kp DEL>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -141,18 +133,24 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT PIPE";
             bindings = <&kp PIPE>, <&kp BACKSLASH>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
         // Quotes
 
-        uns_quote: unshift_quote {
+        ns_left: no_shift_left {
+            compatible = "zmk,behavior-mod-morph";
+            display-name = "_no_shift_left";
+            bindings = <&kp LEFT>, <&kp LEFT>;
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        fl_quote: flip_quote {
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT QUOTE";
             bindings = <&kp DQT>, <&kp APOS>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -162,7 +160,7 @@
             display-name = "TD: Quote";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&uns_quote>, <&macro_dquotes>;
+            bindings = <&fl_quote>, <&macro_quotes>;
         };
 
         // Numbers with SHIFT
@@ -171,7 +169,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 1-!";
             bindings = <&kp LS(N1)>, <&kp N1>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -180,7 +177,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 2-@";
             bindings = <&kp LS(N2)>, <&kp N2>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -189,7 +185,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 3-#";
             bindings = <&kp LS(N3)>, <&kp N3>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -198,7 +193,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 4-$";
             bindings = <&kp LS(N4)>, <&kp N4>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -207,7 +201,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 5-%";
             bindings = <&kp LS(N5)>, <&kp N5>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -216,7 +209,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 6-^";
             bindings = <&kp LS(N6)>, <&kp N6>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -225,7 +217,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 7-&";
             bindings = <&kp LS(N7)>, <&kp N7>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -234,7 +225,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 8-*";
             bindings = <&kp LS(N8)>, <&kp N8>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -243,7 +233,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 9-(";
             bindings = <&kp LS(N9)>, <&kp N9>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -252,7 +241,6 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "UNSHIFT 0-)";
             bindings = <&kp LS(N0)>, <&kp N0>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -266,7 +254,7 @@
             bindings = <
 &kp EQUAL  &uns1           &uns2           &uns3        &uns4        &uns5  &td_kp                                                   &mo 3      &uns6  &uns7        &uns8        &uns9       &uns0               &kp MINUS
 &kp TAB    &kp Q           &kp W           &kp E        &kp R        &kp T  &none                                                    &none      &kp Y  &kp U        &kp I        &kp O       &kp P               &uns_pipe
-&kp ESC    &hm LEFT_GUI A  &hm LEFT_ALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &none     &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr RSHFT J  &hm RCTRL K  &hm RALT L  &hm RIGHT_GUI SEMI  &td_quote
+&kp ESC    &hm LEFT_GUI A  &hm LEFT_ALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &none     &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &td_quote
 &tdsc      &kp Z           &kp X           &kp C        &kp V        &kp B                       &kp HOME      &kp PG_UP                        &kp N  &kp M        &kp COMMA    &kp DOT     &kp FSLH            &kp RSHFT
 &mo 2      &kp GRAVE       &kp CAPS        &kp LEFT     &kp RIGHT           &bsp_del  &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP       &kp DOWN     &kp LBKT    &kp RBKT            &mo 2
             >;
