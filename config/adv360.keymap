@@ -172,6 +172,16 @@
             bindings = <&fl_quote>, <&macro_quotes>;
         };
 
+        // Flip tilde
+
+        fl_tilde: fl_tilde {
+            compatible = "zmk,behavior-mod-morph";
+            display-name = "FLIP TILDE";
+            bindings = <&kp TILDE>, <&kp GRAVE>;
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
         // Numbers with SHIFT
 
         fl_1: flip_1 {
@@ -263,9 +273,9 @@
             bindings = <
 &kp EQUAL  &fl_1           &fl_2           &fl_3        &fl_4        &fl_5  &td_kp                                                   &mo 3      &fl_6  &fl_7        &fl_8        &fl_9       &fl_0               &kp MINUS
 &kp TAB    &kp Q           &kp W           &kp E        &kp R        &kp T  &none                                                    &none      &kp Y  &kp U        &kp I        &kp O       &kp P               &fl_pipe
-&kp ESC    &hm LEFT_GUI A  &hm LEFT_ALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &none     &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &td_quote
+&kp ESC    &hm LEFT_GUI A  &hm LEFT_ALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &none     &kp SPACE  &kp ENTER      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &td_quote
 &td_sc      &kp Z           &kp X           &kp C        &kp V        &kp B                       &kp HOME      &kp PG_UP                        &kp N  &kp M        &kp COMMA    &kp DOT     &kp FSLH            &kp RSHFT
-&mo 2      &kp GRAVE       &kp CAPS        &kp LEFT     &kp RIGHT           &bsp_del  &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP       &kp DOWN     &kp LBKT    &kp RBKT            &mo 2
+&mo 2      &fl_tilde       &kp CAPS        &kp LEFT     &kp RIGHT           &bsp_del  &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP       &kp DOWN     &kp LBKT    &kp RBKT            &mo 2
             >;
         };
 
