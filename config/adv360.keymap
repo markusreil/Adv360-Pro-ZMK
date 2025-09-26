@@ -67,6 +67,9 @@
     };
 
     behaviors {
+
+        // Homerow mods
+
         hm: homerow_mod {
             compatible = "zmk,behavior-hold-tap";
             display-name = "HOMEROW_MOD";
@@ -103,13 +106,17 @@
             hold-trigger-on-release;
         };
 
-        tdsc: tap_dance_shift_caps {
+        // SHIFT: double-tap activates CAPS_LOCK
+
+        td_sc: tap_dance_shift_caps {
             compatible = "zmk,behavior-tap-dance";
             display-name = "TD: Shift, Capslock";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&kp LSHFT>, <&kp CAPS>;
         };
+
+        // KP: double-tap activates permanently
 
         td_kp: tap_dance_keypad {
             compatible = "zmk,behavior-tap-dance";
@@ -118,6 +125,8 @@
             tapping-term-ms = <200>;
             bindings = <&mo 1>, <&tog 1>;
         };
+
+        // SHIFT+BSP = DELETE
 
         bsp_del: mo_backspace_delete {
             compatible = "zmk,behavior-mod-morph";
@@ -129,9 +138,9 @@
 
         // Pipe
 
-        uns_pipe: unshift_pipe {
+        fl_pipe: flip_pipe {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT PIPE";
+            display-name = "FLIP PIPE";
             bindings = <&kp PIPE>, <&kp BACKSLASH>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -149,7 +158,7 @@
 
         fl_quote: flip_quote {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT QUOTE";
+            display-name = "FLIP QUOTE";
             bindings = <&kp DQT>, <&kp APOS>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -165,81 +174,81 @@
 
         // Numbers with SHIFT
 
-        uns1: unshift_1 {
+        fl_1: flip_1 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 1-!";
+            display-name = "FLIP 1";
             bindings = <&kp LS(N1)>, <&kp N1>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        uns2: unshift_2 {
+        fl_2: flip_2 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 2-@";
+            display-name = "FLIP 2";
             bindings = <&kp LS(N2)>, <&kp N2>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        uns3: unshift_3 {
+        fl_3: flip_3 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 3-#";
+            display-name = "FLIP 3";
             bindings = <&kp LS(N3)>, <&kp N3>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        uns4: unshift_4 {
+        fl_4: flip_4 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 4-$";
+            display-name = "FLIP 4";
             bindings = <&kp LS(N4)>, <&kp N4>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        uns5: unshift_5 {
+        fl_5: flip_5 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 5-%";
+            display-name = "FLIP 5";
             bindings = <&kp LS(N5)>, <&kp N5>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        uns6: unshift_6 {
+        fl_6: flip_6 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 6-^";
+            display-name = "FLIP 6";
             bindings = <&kp LS(N6)>, <&kp N6>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        uns7: unshift_7 {
+        fl_7: flip_7 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 7-&";
+            display-name = "FLIP 7";
             bindings = <&kp LS(N7)>, <&kp N7>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        uns8: unshift_8 {
+        fl_8: flip_8 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 8-*";
+            display-name = "FLIP 8";
             bindings = <&kp LS(N8)>, <&kp N8>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        uns9: unshift_9 {
+        fl_9: flip_9 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 9-(";
+            display-name = "FLIP 9";
             bindings = <&kp LS(N9)>, <&kp N9>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
-        uns0: unshift_0 {
+        fl_0: flip_0 {
             compatible = "zmk,behavior-mod-morph";
-            display-name = "UNSHIFT 0-)";
+            display-name = "FLIP 0";
             bindings = <&kp LS(N0)>, <&kp N0>;
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
@@ -252,10 +261,10 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp EQUAL  &uns1           &uns2           &uns3        &uns4        &uns5  &td_kp                                                   &mo 3      &uns6  &uns7        &uns8        &uns9       &uns0               &kp MINUS
-&kp TAB    &kp Q           &kp W           &kp E        &kp R        &kp T  &none                                                    &none      &kp Y  &kp U        &kp I        &kp O       &kp P               &uns_pipe
+&kp EQUAL  &fl_1           &fl_2           &fl_3        &fl_4        &fl_5  &td_kp                                                   &mo 3      &fl_6  &fl_7        &fl_8        &fl_9       &fl_0               &kp MINUS
+&kp TAB    &kp Q           &kp W           &kp E        &kp R        &kp T  &none                                                    &none      &kp Y  &kp U        &kp I        &kp O       &kp P               &fl_pipe
 &kp ESC    &hm LEFT_GUI A  &hm LEFT_ALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &none     &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &td_quote
-&tdsc      &kp Z           &kp X           &kp C        &kp V        &kp B                       &kp HOME      &kp PG_UP                        &kp N  &kp M        &kp COMMA    &kp DOT     &kp FSLH            &kp RSHFT
+&td_sc      &kp Z           &kp X           &kp C        &kp V        &kp B                       &kp HOME      &kp PG_UP                        &kp N  &kp M        &kp COMMA    &kp DOT     &kp FSLH            &kp RSHFT
 &mo 2      &kp GRAVE       &kp CAPS        &kp LEFT     &kp RIGHT           &bsp_del  &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP       &kp DOWN     &kp LBKT    &kp RBKT            &mo 2
             >;
         };
