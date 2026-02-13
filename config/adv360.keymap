@@ -13,14 +13,18 @@
 #define THUMBS LH1 LH0 RH0 RH1
 
 / {
+
     macros {
         #include "version.dtsi"
+        #include "mreil/macros.dtsi"
 
-        macro_quotes: macro_quotes {
+        macro_squotes: MACRO_SQUOTES()
+
+        macro_dquotes: macro_dquotes {
             compatible = "zmk,behavior-macro";
             display-name = "macro_quotes";
             #binding-cells = <0>;
-            bindings = <&fl_quote &fl_quote &ns_left>;
+            bindings = <&kp DQT &kp DQT &ns_left>;
         };
 
         macro_braces: macro_braces {
@@ -44,13 +48,6 @@
             bindings = <&kp LBKT &kp RBKT &kp LEFT>;
         };
 
-        macro_kinesis: macro_kinesis {
-            compatible = "zmk,behavior-macro";
-            display-name = "macro_kinesis";
-            #binding-cells = <0>;
-            bindings = <&kp LS(K) &kp I &kp N &kp E &kp S &kp I &kp S>;
-        };
-
         Win_Snip_Tool: Win_Snip {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -68,7 +65,6 @@
 
     behaviors {
         // Homerow mods
-
         hm: homerow_mod {
             compatible = "zmk,behavior-hold-tap";
             display-name = "HOMEROW_MOD";
@@ -87,6 +83,7 @@
             require-prior-idle-ms = <150>;
             tapping-term-ms = <250>;
             quick-tap-ms = <175>;
+            retro-tap;
             bindings = <&kp>, <&kp>;
 
             hold-trigger-key-positions = < KEYS_R >; // List of keys on the right side of the keyboard
@@ -101,6 +98,7 @@
             require-prior-idle-ms = <150>;
             tapping-term-ms = <250>;
             quick-tap-ms = <175>;
+            retro-tap;
             bindings = <&kp>, <&kp>;
 
             hold-trigger-key-positions = < KEYS_L >; // List of keys on the left side of the keyboard
@@ -151,6 +149,15 @@
 
         // Quotes
 
+        ns_apos: no_shift_apos {
+            compatible = "zmk,behavior-mod-morph";
+            display-name = "_no_shift_apos";
+            bindings = <&kp APOS>, <&kp APOS>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
         ns_left: no_shift_left {
             compatible = "zmk,behavior-mod-morph";
             display-name = "_no_shift_left";
@@ -160,21 +167,31 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
+
+        td_squote: tap_dance_squote {
+            compatible = "zmk,behavior-tap-dance";
+            display-name = "TD: SQuote";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&ns_apos>, <&macro_squotes>;
+        };
+
+        td_dquote: tap_dance_dquote {
+            compatible = "zmk,behavior-tap-dance";
+            display-name = "TD: DQuote";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp DQT>, <&macro_dquotes>;
+        };
+
+
         fl_quote: flip_quote {
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP QUOTE";
-            bindings = <&kp DQT>, <&kp APOS>;
+            bindings = <&td_dquote>, <&td_squote>;
 
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        td_quote: tap_dance_quote {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "TD: Quote";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&fl_quote>, <&macro_quotes>;
         };
 
         // Flip tilde
@@ -289,7 +306,7 @@
             bindings = <
 &kp EQUAL  &fl_1       &fl_2       &fl_3        &fl_4         &fl_5  &td_kp                                                    &mo 3      &fl_6  &fl_7         &fl_8        &fl_9       &fl_0              &kp MINUS
 &kp TAB    &kp Q       &kp W       &kp E        &kp R         &kp T  &kp SPACE                                                 &none      &kp Y  &kp U         &kp I        &kp O       &kp P              &fl_pipe
-&kp ESC    &hm LGUI A  &hm LALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &kp RET    &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &td_quote
+&kp ESC    &hm LGUI A  &hm LALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &kp RET    &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &fl_quote
 &td_sc     &kp Z       &kp X       &kp C        &kp V         &kp B                        &kp HOME      &kp PG_UP                        &kp N  &kp M         &kp COMMA    &kp DOT     &kp FSLH           &kp RSHFT
 &mo 2      &fl_tilde   &kp CAPS    &kp LEFT     &kp RIGHT            &bsp_del   &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP        &kp DOWN     &kp LBKT    &kp RBKT           &mo 2
             >;
