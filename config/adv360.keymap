@@ -18,8 +18,6 @@
         #include "version.dtsi"
         #include "mreil/macros.dtsi"
 
-        macro_squotes: MACRO_SQUOTES()
-
         macro_dquotes: macro_dquotes {
             compatible = "zmk,behavior-macro";
             display-name = "macro_quotes";

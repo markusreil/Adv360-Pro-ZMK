@@ -4,3 +4,5 @@
             #binding-cells = <0>;\
             bindings = <&kp APOS &kp APOS &ns_left>;\
         };
+
+macro_squotes: MACRO_SQUOTES()
