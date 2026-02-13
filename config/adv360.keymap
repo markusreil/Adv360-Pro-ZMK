@@ -13,7 +13,6 @@
 #define THUMBS LH1 LH0 RH0 RH1
 
 / {
-
     macros {
         #include "version.dtsi"
         #include "./mreil/test.dtsi"
