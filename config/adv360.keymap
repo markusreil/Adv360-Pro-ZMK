@@ -67,7 +67,6 @@
     };
 
     behaviors {
-
         // Homerow mods
 
         hm: homerow_mod {
@@ -89,6 +88,7 @@
             tapping-term-ms = <250>;
             quick-tap-ms = <175>;
             bindings = <&kp>, <&kp>;
+
             hold-trigger-key-positions = < KEYS_R >; // List of keys on the right side of the keyboard
             hold-trigger-on-release;
         };
@@ -102,6 +102,7 @@
             tapping-term-ms = <250>;
             quick-tap-ms = <175>;
             bindings = <&kp>, <&kp>;
+
             hold-trigger-key-positions = < KEYS_L >; // List of keys on the left side of the keyboard
             hold-trigger-on-release;
         };
@@ -132,6 +133,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "BACKSPACE / DEL";
             bindings = <&kp BACKSPACE>, <&kp DEL>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -142,6 +144,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP PIPE";
             bindings = <&kp PIPE>, <&kp BACKSLASH>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -152,6 +155,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "_no_shift_left";
             bindings = <&kp LEFT>, <&kp LEFT>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -160,6 +164,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP QUOTE";
             bindings = <&kp DQT>, <&kp APOS>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -178,6 +183,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP TILDE";
             bindings = <&kp TILDE>, <&kp GRAVE>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -188,6 +194,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 1";
             bindings = <&kp LS(N1)>, <&kp N1>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -196,6 +203,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 2";
             bindings = <&kp LS(N2)>, <&kp N2>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -204,6 +212,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 3";
             bindings = <&kp LS(N3)>, <&kp N3>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -212,6 +221,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 4";
             bindings = <&kp LS(N4)>, <&kp N4>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -220,6 +230,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 5";
             bindings = <&kp LS(N5)>, <&kp N5>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -228,6 +239,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 6";
             bindings = <&kp LS(N6)>, <&kp N6>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -236,6 +248,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 7";
             bindings = <&kp LS(N7)>, <&kp N7>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -244,6 +257,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 8";
             bindings = <&kp LS(N8)>, <&kp N8>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -252,6 +266,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 9";
             bindings = <&kp LS(N9)>, <&kp N9>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -260,6 +275,7 @@
             compatible = "zmk,behavior-mod-morph";
             display-name = "FLIP 0";
             bindings = <&kp LS(N0)>, <&kp N0>;
+
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -271,11 +287,11 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp EQUAL  &fl_1           &fl_2           &fl_3        &fl_4        &fl_5  &td_kp                                                   &mo 3      &fl_6  &fl_7        &fl_8        &fl_9       &fl_0               &kp MINUS
-&kp TAB    &kp Q           &kp W           &kp E        &kp R        &kp T  &kp SPACE                                                    &none      &kp Y  &kp U        &kp I        &kp O       &kp P               &fl_pipe
-&kp ESC    &hm LGUI A  &hm LALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &ENTER     &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &td_quote
-&td_sc      &kp Z           &kp X           &kp C        &kp V        &kp B                       &kp HOME      &kp PG_UP                        &kp N  &kp M        &kp COMMA    &kp DOT     &kp FSLH            &kp RSHFT
-&mo 2      &fl_tilde       &kp CAPS        &kp LEFT     &kp RIGHT           &bsp_del  &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP       &kp DOWN     &kp LBKT    &kp RBKT            &mo 2
+&kp EQUAL  &fl_1       &fl_2       &fl_3        &fl_4         &fl_5  &td_kp                                                    &mo 3      &fl_6  &fl_7         &fl_8        &fl_9       &fl_0              &kp MINUS
+&kp TAB    &kp Q       &kp W       &kp E        &kp R         &kp T  &kp SPACE                                                 &none      &kp Y  &kp U         &kp I        &kp O       &kp P              &fl_pipe
+&kp ESC    &hm LGUI A  &hm LALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &kp RET    &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &td_quote
+&td_sc     &kp Z       &kp X       &kp C        &kp V         &kp B                        &kp HOME      &kp PG_UP                        &kp N  &kp M         &kp COMMA    &kp DOT     &kp FSLH           &kp RSHFT
+&mo 2      &fl_tilde   &kp CAPS    &kp LEFT     &kp RIGHT            &bsp_del   &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP        &kp DOWN     &kp LBKT    &kp RBKT           &mo 2
             >;
         };
 
@@ -315,11 +331,11 @@
         game {
             display-name = "Game";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans                                                    &trans  &trans  &trans          &trans          &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans                                                    &trans  &trans  &trans          &trans          &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans    &trans  &trans          &trans  &trans  &trans          &trans          &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                          &trans    &trans                          &trans  &trans          &kp UP_ARROW    &trans           &trans  &trans
-&trans  &trans  &trans  &trans  &trans                  &trans  &trans  &trans    &trans  &trans  &trans                  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans          &trans          &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans                                      &trans  &trans  &trans          &trans          &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans          &trans          &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                  &trans      &trans                  &trans  &trans          &kp UP_ARROW    &trans           &trans  &trans
+&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans      &trans  &trans  &trans          &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans  &trans
             >;
         };
     };
