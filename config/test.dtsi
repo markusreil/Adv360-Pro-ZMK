@@ -1,8 +1,1 @@
 #define A 5
-
-        macro_x: macro_x {
-            compatible = "zmk,behavior-macro";
-            display-name = "macro_x";
-            #binding-cells = <0>;
-            bindings = <&kp APOS &kp APOS &ns_left>;
-        };
