@@ -6,3 +6,10 @@
             #binding-cells = <0>;
             bindings = <&kp APOS &kp APOS &ns_left>;
         };
+
+        macro_squotes: macro_squotes {
+            compatible = "zmk,behavior-macro";
+            display-name = "macro_quotes";
+            #binding-cells = <0>;
+            bindings = <&kp APOS &kp APOS &ns_left>;
+        };
