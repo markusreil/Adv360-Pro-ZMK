@@ -1,8 +1,0 @@
-#define MACRO_SQUOTES() macro_sqduotes {\
-            compatible = "zmk,behavior-macro";\
-            display-name = "macro_quotes";\
-            #binding-cells = <0>;\
-            bindings = <&kp APOS &kp APOS &ns_left>;\
-        };
-
-macro_squdotes: MACRO_SQUOTES()

@@ -8,291 +8,113 @@
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/adv360.h"
 
-#define KEYS_L LN0 LN1 LN2 LN3 LN4 LN5 LT0 LT1 LT2 LT3 LT4 LT5 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LB2 LB3 LB4 LB5  LH0 LH1 // left hand
-#define KEYS_R RN0 RN1 RN2 RN3 RN4 RN5 RT0 RT1 RT2 RT3 RT4 RT5 RM0 RM1 RM2 RM3 RM4 RM5 RB0 RB1 RB2 RB3 RB4 RB5  RH0 RH1 // right hand
+#define LH LN0 LN1 LN2 LN3 LN4 LN5 LT0 LT1 LT2 LT3 LT4 LT5 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LB2 LB3 LB4 LB5  LH0 LH1 GRAVE // left hand
+#define RH RN0 RN1 RN2 RN3 RN4 RN5 RT0 RT1 RT2 RT3 RT4 RT5 RM0 RM1 RM2 RM3 RM4 RM5 RB0 RB1 RB2 RB3 RB4 RB5  RH0 RH1 LBKT RBKT // right hand
 #define THUMBS LH1 LH0 RH0 RH1
+
+#define FLIPSHIFT(name, key) ZMK_MOD_MORPH(name,\
+   bindings = <&kp LS(key)>, <&kp key>;\
+   mods = <(MOD_LSFT|MOD_RSFT)>;\
+)
+#define NOSHIFT(name, key) ZMK_MOD_MORPH(name,\
+   bindings = <&kp key>, <&kp key>;\
+   mods = <(MOD_LSFT|MOD_RSFT)>;\
+)
+
+// For quick testing
+FLIPSHIFT(fl_z, Z)
+
+ZMK_MACRO(dquotes, bindings = <&kp DQT &kp DQT &_ns_left>; )
+ZMK_MACRO(squotes, bindings = <&kp APOS &kp APOS &_ns_left>; )
+ZMK_MACRO(braces, bindings = <&kp LBRC &kp RBRC &kp LEFT>; )
+ZMK_MACRO(parens, bindings = <&kp LPAR &kp RPAR &kp LEFT>; )
+ZMK_MACRO(brackets, bindings = <&kp LBKT &kp RBKT &kp LEFT>; )
+ZMK_MACRO(angles, bindings = <&kp LT &kp GT &kp LEFT>; )
+
+// Numbers on SHIFT
+FLIPSHIFT(fl_0, N0)
+FLIPSHIFT(fl_1, N1)
+FLIPSHIFT(fl_2, N2)
+FLIPSHIFT(fl_3, N3)
+FLIPSHIFT(fl_4, N4)
+FLIPSHIFT(fl_5, N5)
+FLIPSHIFT(fl_6, N6)
+FLIPSHIFT(fl_7, N7)
+FLIPSHIFT(fl_8, N8)
+FLIPSHIFT(fl_9, N9)
+
+// Flip some keys
+FLIPSHIFT(fl_tilde, GRAVE)
+FLIPSHIFT(fl_pipe, BACKSLASH)
+
+// Redefine some keys
+ZMK_MOD_MORPH(bsp_del,
+    bindings = <&kp BACKSPACE>, <&kp DEL>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+// Tapdance some keys
+ZMK_TAP_DANCE(td_shift_caps,
+    bindings = <&kp LSHFT>, <&kp CAPS>;
+)
+ZMK_TAP_DANCE(td_keypad_toggle,
+    bindings = <&mo 1>, <&tog 1>;
+)
+
+// Homerow mods
+ZMK_HOLD_TAP(hm,
+    tapping-term-ms = <250>;
+    quick-tap-ms = <175>;
+    flavor = "balanced";
+    bindings = <&kp>, <&kp>;
+)
+ZMK_HOLD_TAP(hml,
+    flavor = "balanced";
+    require-prior-idle-ms = <150>;
+    tapping-term-ms = <250>;
+    quick-tap-ms = <175>;
+    retro-tap;
+    bindings = <&kp>, <&kp>;
+    hold-trigger-key-positions = < RH >;
+    hold-trigger-on-release;
+)
+ZMK_HOLD_TAP(hmr,
+    flavor = "balanced";
+    require-prior-idle-ms = <150>;
+    tapping-term-ms = <250>;
+    quick-tap-ms = <175>;
+    retro-tap;
+    bindings = <&kp>, <&kp>;
+    hold-trigger-key-positions = < LH >;
+    hold-trigger-on-release;
+)
+
+//
+// Special behaviour for quotes, braces, brackets
+//
+
+// Left arrow even when shift pressed:
+NOSHIFT(_ns_left, LEFT)
+
+// Flip ' and ", tapdance moves cursor inside a pair
+NOSHIFT(_ns_apos, APOS)                                              // APOS even with SHIFT
+ZMK_TAP_DANCE(_td_squotes, bindings = <&_ns_apos>, <&squotes>; )     // APOS, single quotes if tapped
+ZMK_TAP_DANCE(_td_dquotes, bindings = <&kp DQT>, <&dquotes>; )       // DQR, double quotes if tapped
+ZMK_MOD_MORPH(fl_quote,
+    bindings = <&_td_dquotes>, <&_td_squotes>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+// Tap for pair of angle brackets
+ZMK_TAP_DANCE(td_lt, bindings = <&kp LT>, <&angles>; )
 
 / {
     macros {
         #include "version.dtsi"
-        #include "test.dtsi"
-
-        macro_dquotes: macro_dquotes {
-            compatible = "zmk,behavior-macro";
-            display-name = "macro_quotes";
-            #binding-cells = <0>;
-            bindings = <&kp DQT &kp DQT &ns_left>;
-        };
-
-        macro_braces: macro_braces {
-            compatible = "zmk,behavior-macro";
-            display-name = "macro_braces";
-            #binding-cells = <0>;
-            bindings = <&kp LBRC &kp RBRC &kp LEFT>;
-        };
-
-        macro_parens: macro_parens {
-            compatible = "zmk,behavior-macro";
-            display-name = "macro_parens";
-            #binding-cells = <0>;
-            bindings = <&kp LPAR &kp RPAR &kp LEFT>;
-        };
-
-        macro_brackets: macro_brackets {
-            compatible = "zmk,behavior-macro";
-            display-name = "macro_brackets";
-            #binding-cells = <0>;
-            bindings = <&kp LBKT &kp RBKT &kp LEFT>;
-        };
-
-        Win_Snip_Tool: Win_Snip {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LS(LG(S))>;
-            display-name = "Windows Screen Snip";
-        };
-
-        Double_Click: Double_Click {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&mkp MB1 &mkp MB1>;
-            display-name = "Double Click";
-        };
     };
 
     behaviors {
-        // Homerow mods
-        hm: homerow_mod {
-            compatible = "zmk,behavior-hold-tap";
-            display-name = "HOMEROW_MOD";
-            #binding-cells = <2>;
-            tapping-term-ms = <250>;
-            quick-tap-ms = <175>;
-            flavor = "balanced";
-            bindings = <&kp>, <&kp>;
-        };
-
-        hml: homerow_mod_left {
-            compatible = "zmk,behavior-hold-tap";
-            display-name = "HOMEROW_MOD_LEFT";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            require-prior-idle-ms = <150>;
-            tapping-term-ms = <250>;
-            quick-tap-ms = <175>;
-            retro-tap;
-            bindings = <&kp>, <&kp>;
-
-            hold-trigger-key-positions = < KEYS_R >; // List of keys on the right side of the keyboard
-            hold-trigger-on-release;
-        };
-
-        hmr: homerow_mod_right {
-            compatible = "zmk,behavior-hold-tap";
-            display-name = "HOMEROW_MOD_RIGHT";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            require-prior-idle-ms = <150>;
-            tapping-term-ms = <250>;
-            quick-tap-ms = <175>;
-            retro-tap;
-            bindings = <&kp>, <&kp>;
-
-            hold-trigger-key-positions = < KEYS_L >; // List of keys on the left side of the keyboard
-            hold-trigger-on-release;
-        };
-
-        // SHIFT: double-tap activates CAPS_LOCK
-
-        td_sc: tap_dance_shift_caps {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "TD: Shift, Capslock";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp LSHFT>, <&kp CAPS>;
-        };
-
-        // KP: double-tap activates permanently
-
-        td_kp: tap_dance_keypad {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "TD: Keypad";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&mo 1>, <&tog 1>;
-        };
-
-        // SHIFT+BSP = DELETE
-
-        bsp_del: mo_backspace_delete {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "BACKSPACE / DEL";
-            bindings = <&kp BACKSPACE>, <&kp DEL>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        // Pipe
-
-        fl_pipe: flip_pipe {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP PIPE";
-            bindings = <&kp PIPE>, <&kp BACKSLASH>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        // Quotes
-
-        ns_apos: no_shift_apos {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "_no_shift_apos";
-            bindings = <&kp APOS>, <&kp APOS>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        ns_left: no_shift_left {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "_no_shift_left";
-            bindings = <&kp LEFT>, <&kp LEFT>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-
-        td_squote: tap_dance_squote {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "TD: SQuote";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&ns_apos>, <&macro_squotes>;
-        };
-
-        td_dquote: tap_dance_dquote {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "TD: DQuote";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp DQT>, <&macro_dquotes>;
-        };
-
-
-        fl_quote: flip_quote {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP QUOTE";
-            bindings = <&td_dquote>, <&td_squote>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        // Flip tilde
-
-        fl_tilde: fl_tilde {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP TILDE";
-            bindings = <&kp TILDE>, <&kp GRAVE>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        // Numbers with SHIFT
-
-        fl_1: flip_1 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 1";
-            bindings = <&kp LS(N1)>, <&kp N1>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        fl_2: flip_2 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 2";
-            bindings = <&kp LS(N2)>, <&kp N2>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        fl_3: flip_3 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 3";
-            bindings = <&kp LS(N3)>, <&kp N3>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        fl_4: flip_4 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 4";
-            bindings = <&kp LS(N4)>, <&kp N4>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        fl_5: flip_5 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 5";
-            bindings = <&kp LS(N5)>, <&kp N5>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        fl_6: flip_6 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 6";
-            bindings = <&kp LS(N6)>, <&kp N6>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        fl_7: flip_7 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 7";
-            bindings = <&kp LS(N7)>, <&kp N7>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        fl_8: flip_8 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 8";
-            bindings = <&kp LS(N8)>, <&kp N8>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        fl_9: flip_9 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 9";
-            bindings = <&kp LS(N9)>, <&kp N9>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
-
-        fl_0: flip_0 {
-            compatible = "zmk,behavior-mod-morph";
-            display-name = "FLIP 0";
-            bindings = <&kp LS(N0)>, <&kp N0>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-        };
+        //
     };
 
     keymap {
@@ -301,11 +123,11 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp EQUAL  &fl_1       &fl_2       &fl_3        &fl_4         &fl_5  &td_kp                                                    &mo 3      &fl_6  &fl_7         &fl_8        &fl_9       &fl_0              &kp MINUS
-&kp TAB    &kp Q       &kp W       &kp E        &kp R         &kp T  &kp SPACE                                                 &none      &kp Y  &kp U         &kp I        &kp O       &kp P              &fl_pipe
-&kp ESC    &hm LGUI A  &hm LALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &kp RET    &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &fl_quote
-&td_sc     &kp Z       &kp X       &kp C        &kp V         &kp B                        &kp HOME      &kp PG_UP                        &kp N  &kp M         &kp COMMA    &kp DOT     &kp FSLH           &kp RSHFT
-&mo 2      &fl_tilde   &kp CAPS    &kp LEFT     &kp RIGHT            &bsp_del   &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP        &kp DOWN     &kp LBKT    &kp RBKT           &mo 2
+&kp EQUAL          &fl_1       &fl_2       &fl_3        &fl_4         &fl_5  &td_keypad_toggle                                                    &mo 3      &fl_6  &fl_7         &fl_8        &fl_9       &fl_0              &kp MINUS
+&kp TAB            &kp Q       &kp W       &kp E        &kp R         &kp T  &kp SPACE                                                            &none      &kp Y  &kp U         &kp I        &kp O       &kp P              &fl_pipe
+&kp ESC            &hm LGUI A  &hm LALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &kp RET               &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &fl_quote
+&td_shift_caps     &kp Z       &kp X       &kp C        &kp V         &kp B                                   &kp HOME      &kp PG_UP                        &kp N  &kp M         &kp COMMA    &kp DOT     &kp FSLH           &kp RSHFT
+&mo 2              &fl_tilde   &kp CAPS    &kp LEFT     &kp RIGHT                       &bsp_del   &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP        &kp DOWN     &kp LBKT    &kp RBKT           &mo 2
             >;
         };
 
