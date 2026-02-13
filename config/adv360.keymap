@@ -16,7 +16,7 @@
 
     macros {
         #include "version.dtsi"
-        #include "test.dtsi"
+        #include "./mreil/test.dtsi"
 
         macro_squotes: macro_squotes {
             compatible = "zmk,behavior-macro";
