@@ -1,0 +1,1 @@
+ZMK_MACRO(prt_email, bindings = <&kp M &kp A &kp R &kp K &kp U &kp S &kp PERIOD &kp R &kp E &kp I &kp L &kp AT &kp G &kp M &kp A &kp I &kp L &kp DOT &kp C &kp O &kp M>; )
