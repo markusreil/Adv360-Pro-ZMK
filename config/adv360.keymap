@@ -10,26 +10,8 @@
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/adv360.h"
 
-#define FLIPSHIFT(name, key) ZMK_MOD_MORPH(name,\
-   bindings = <&kp LS(key)>, <&kp key>;\
-   mods = <(MOD_LSFT|MOD_RSFT)>;\
-)
-#define NOSHIFT(name, key) ZMK_MOD_MORPH(name,\
-   bindings = <&kp key>, <&kp key>;\
-   mods = <(MOD_LSFT|MOD_RSFT)>;\
-)
-
-// Numbers on SHIFT
-FLIPSHIFT(fl_0, N0)
-FLIPSHIFT(fl_1, N1)
-FLIPSHIFT(fl_2, N2)
-FLIPSHIFT(fl_3, N3)
-FLIPSHIFT(fl_4, N4)
-FLIPSHIFT(fl_5, N5)
-FLIPSHIFT(fl_6, N6)
-FLIPSHIFT(fl_7, N7)
-FLIPSHIFT(fl_8, N8)
-FLIPSHIFT(fl_9, N9)
+// custom
+#include "mreil/flipshift.dtsi"
 
 / {
     behaviors {
@@ -53,7 +35,7 @@ FLIPSHIFT(fl_9, N9)
     default_layer {
       display-name = "Base";
       bindings = <
-        &kp EQUAL &kp N1    &kp N2   &kp N3   &kp N4     &kp N5 &tog 1                                                           &mo 3 &kp N6 &kp N7 &kp N8    &kp N9   &kp N0   &kp MINUS
+        &kp EQUAL &fl_1    &kp N2   &kp N3   &kp N4     &kp N5 &tog 1                                                           &mo 3 &kp N6 &kp N7 &kp N8    &kp N9   &kp N0   &kp MINUS
         &kp TAB   &kp Q     &kp W    &kp E    &kp R      &kp T  &none                                                            &none &kp Y  &kp U  &kp I     &kp O    &kp P    &kp BSLH
         &kp ESC   &kp A     &kp S    &kp D    &kp F      &kp G  &none           &kp LCTRL &kp LALT &kp LGUI  &kp RCTRL           &none &kp H  &kp J  &kp K     &kp L    &kp SEMI &kp SQT
         &kp LSHFT &kp Z     &kp X    &kp C    &kp V      &kp B                            &kp HOME &kp PG_UP                           &kp N  &kp M  &kp COMMA &kp DOT  &kp FSLH &kp RSHFT
