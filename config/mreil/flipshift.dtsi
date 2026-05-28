@@ -13,5 +13,5 @@ FLIPSHIFT(fl_9, N9)
 FLIPSHIFT(fl_0, N0)
 
 // Flip some other keys
-FLIPSHIFT(fl_tilde, GRAVE)
-FLIPSHIFT(fl_pipe, BACKSLASH)
+FLIPSHIFT(tilde, GRAVE)
+FLIPSHIFT(pipe, BACKSLASH)

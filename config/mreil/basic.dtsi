@@ -1,0 +1,13 @@
+// Redefine some keys
+ZMK_MOD_MORPH(bsp_del,
+    bindings = <&kp BACKSPACE>, <&kp DEL>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
+
+// Tapdance some keys
+ZMK_TAP_DANCE(shift_caps,
+    bindings = <&kp LSHFT>, <&kp CAPS>;
+)
+ZMK_TAP_DANCE(kp_tog,
+    bindings = <&mo 1>, <&tog 1>;
+)

@@ -9,6 +9,10 @@
 
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/key-labels/adv360.h"
+
+// custom
+
+#include "mreil/basic.dtsi"
 #include "mreil/homerow.dtsi"
 #include "mreil/flipshift.dtsi"
 #include "mreil/quotes.dtsi"
@@ -24,16 +28,16 @@
         default_layer {
             display-name = "Base";
             bindings = <
-&kp EQUAL  &fl_1       &fl_2       &fl_3        &fl_4         &fl_5  &tog 1                                                   &mo 3      &fl_6  &fl_7         &fl_8        &fl_9       &fl_0              &kp MINUS
-&kp TAB    &kp Q       &kp W       &kp E        &kp R         &kp T  &none                                                    &none      &kp Y  &kp U         &kp I        &kp O       &kp P              &kp BSLH
-&kp ESC    &hm LGUI A  &hm LALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &kp RET   &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &quotes
-&kp LSHFT  &kp Z       &kp X       &kp C        &kp V         &kp B                       &kp HOME      &kp PG_UP                        &kp N  &kp M         &comma       &kp DOT     &kp FSLH           &kp RSHFT
-&mo 2      &kp GRAVE   &kp CAPS    &kp LEFT     &kp RIGHT            &kp BSPC  &kp DEL    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP        &kp DOWN     &kp LBKT    &kp RBKT           &mo 2
+&kp EQUAL    &fl_1       &fl_2       &fl_3        &fl_4         &fl_5  &kp_tog                                                  &mo 3      &fl_6  &fl_7         &fl_8        &fl_9       &fl_0              &kp MINUS
+&kp TAB      &kp Q       &kp W       &kp E        &kp R         &kp T  &none                                                    &none      &kp Y  &kp U         &kp I        &kp O       &kp P              &pipe
+&kp ESC      &hm LGUI A  &hm LALT S  &hm LCTRL D  &hml LSHFT F  &kp G  &kp RET   &kp LCTRL  &kp LALT      &kp LGUI   &kp RCTRL  &none      &kp H  &hmr LSHFT J  &hm LCTRL K  &hm LALT L  &hm LEFT_GUI SEMI  &quotes
+&shift_caps  &kp Z       &kp X       &kp C        &kp V         &kp B                       &kp HOME      &kp PG_UP                        &kp N  &kp M         &comma       &kp DOT     &kp FSLH           &kp RSHFT
+&mo 2        &tilde      &kp CAPS    &kp LEFT     &kp RIGHT            &bsp_del  &kp TAB    &kp END       &kp PG_DN  &kp ENTER  &kp SPACE         &kp UP        &kp DOWN     &kp LBKT    &kp RBKT           &mo 2
             >;
         };
 
         keypad {
-            display-name = "Kp";
+            display-name = "Kp (white)";
             bindings = <
 &kp EQUAL  &kp N1     &kp N2    &kp N3    &kp N4     &kp N5  &trans                                                   &mo 3      &kp N6  &kp KP_NUM  &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY  &kp MINUS
 &kp TAB    &kp Q      &kp W     &kp E     &kp R      &kp T   &none                                                    &none      &kp Y   &kp KP_N7   &kp KP_N8     &kp KP_N9      &kp KP_MINUS     &kp BSLH
@@ -44,7 +48,7 @@
         };
 
         fn {
-            display-name = "Fn";
+            display-name = "Fn (blue)";
             bindings = <
 &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &tog 1                                      &mo 3   &kp F7  &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
 &trans  &trans  &trans  &trans  &trans  &trans  &none                                       &none   &trans  &trans  &trans  &trans   &trans   &trans
@@ -55,7 +59,7 @@
         };
 
         mod {
-            display-name = "Mod";
+            display-name = "Mod (green)";
             bindings = <
 &none           &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none                                                  &trans           &none  &none       &none       &none  &none  &none
 &none           &none         &none         &none         &none         &none         &bootloader                                            &bootloader      &none  &none       &none       &none  &none  &none
@@ -65,7 +69,8 @@
             >;
         };
 
-        NO_MODS {
+        no_mods {
+            display-name = "No Mods (color)";
             bindings = <
 &trans  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &trans                                      &trans  &kp N6  &kp N7  &kp N8     &kp N9   &kp N0    &trans
 &trans  &kp Q   &kp W   &kp E   &kp R   &kp T   &trans                                      &trans  &kp Y   &kp U   &kp I      &kp O    &kp P     &trans
