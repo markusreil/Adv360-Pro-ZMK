@@ -6,10 +6,10 @@ NOSHIFT(_ns_apos, APOS)  // APOS even with SHIFT
 // double quotes, cursor inside
 ZMK_MACRO(_dquotes, bindings = <&kp DQT &kp DQT &_ns_left>; )
 ZMK_MACRO(_squotes, bindings = <&kp APOS &kp APOS &_ns_left>; )
-ZMK_MACRO(_brcs, bindings = <&kp LBRC &kp RBRC &kp LEFT>; )
-ZMK_MACRO(_parens, bindings = <&kp LPAR &kp RPAR &kp LEFT>; )
-ZMK_MACRO(_bkts, bindings = <&kp LBKT &kp RBKT &kp LEFT>; )
-ZMK_MACRO(_angles, bindings = <&kp LT &kp GT &kp LEFT>; )
+ZMK_MACRO(_brcs, bindings = <&kp LBRC &kp RBRC &_ns_left>; )
+ZMK_MACRO(_parens, bindings = <&kp LPAR &kp RPAR &_ns_left>; )
+ZMK_MACRO(_bkts, bindings = <&kp LBKT &kp RBKT &_ns_left>; )
+ZMK_MACRO(_angles, bindings = <&kp LT &kp GT &_ns_left>; )
 
 // flip SQT and DQT
 ZMK_TAP_DANCE(_td_squotes, bindings = <&_ns_apos>, <&_squotes>; )     // APOS, single quotes if tapped
@@ -19,18 +19,19 @@ ZMK_MOD_MORPH(quotes,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-// Tap , for <>
+// Tap ',' for '<>'
 ZMK_TAP_DANCE(comma, bindings = <&kp COMMA>, <&_angles>; )
 
 // Tap ( for ()
-ZMK_TAP_DANCE(_td_parens, bindings = <&kp N7>, <&_parens>; )
+ZMK_TAP_DANCE(_td_parens, bindings = <&kp LPAR>, <&_parens>; )
 ZMK_MOD_MORPH(n9,
-    bindings = <&fl_9>, <&_td_parens>;
+    bindings = <&_td_parens>, <&fl_9>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-// Tap [ for []
-ZMK_TAP_DANCE(_td_bkts, bindings = <&kp LBKT>, <&_bkts>; )
-
-// TAP { for {}
-ZMK_TAP_DANCE(_td_brcs, bindings = <&kp LBRC>, <&_brcs>; )
+ZMK_TAP_DANCE(_td_bkts, bindings = <&kp LBKT>, <&_bkts>; ) // Tap '[' for '[]'
+ZMK_TAP_DANCE(_td_brcs, bindings = <&kp LBRC>, <&_brcs>; ) // Tap '{' for '{}'
+ZMK_MOD_MORPH(lbkt,
+    bindings = <&_td_bkts>, <&_td_brcs>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
