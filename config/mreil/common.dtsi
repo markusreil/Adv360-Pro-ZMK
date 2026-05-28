@@ -1,0 +1,23 @@
+#define BASE 0
+#define NOMODS 1
+#define KEYPAD 2
+#define FN 3
+#define MOD 4
+
+//
+// Flip behavior when SHIFT is pressed / not pressed
+//
+// e.g. '1' with SHIFT, '!' without
+//
+#define FLIPSHIFT(name, key) ZMK_MOD_MORPH(name,\
+   bindings = <&kp LS(key)>, <&kp key>;\
+   mods = <(MOD_LSFT|MOD_RSFT)>;\
+)
+
+//
+// force no SHIFT, even when key is mapped with FLIPSHIFT
+//
+#define NOSHIFT(name, key) ZMK_MOD_MORPH(name,\
+   bindings = <&kp key>, <&kp key>;\
+   mods = <(MOD_LSFT|MOD_RSFT)>;\
+)

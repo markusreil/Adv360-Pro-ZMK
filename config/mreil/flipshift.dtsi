@@ -1,0 +1,17 @@
+#include "common.dtsi"
+
+// Numbers on SHIFT
+FLIPSHIFT(fl_1, N1)
+FLIPSHIFT(fl_2, N2)
+FLIPSHIFT(fl_3, N3)
+FLIPSHIFT(fl_4, N4)
+FLIPSHIFT(fl_5, N5)
+FLIPSHIFT(fl_6, N6)
+FLIPSHIFT(fl_7, N7)
+FLIPSHIFT(fl_8, N8)
+FLIPSHIFT(fl_9, N9)
+FLIPSHIFT(fl_0, N0)
+
+// Flip some other keys
+FLIPSHIFT(tilde, GRAVE)
+FLIPSHIFT(pipe, BACKSLASH)
