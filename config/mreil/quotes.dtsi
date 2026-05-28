@@ -24,6 +24,10 @@ ZMK_TAP_DANCE(comma, bindings = <&kp COMMA>, <&_angles>; )
 
 // Tap ( for ()
 ZMK_TAP_DANCE(_td_parens, bindings = <&kp N7>, <&_parens>; )
+ZMK_MOD_MORPH(n9,
+    bindings = <&fl_9>, <&_td_parens>;
+    mods = <(MOD_LSFT|MOD_RSFT)>;
+)
 
 // Tap [ for []
 ZMK_TAP_DANCE(_td_bkts, bindings = <&kp LBKT>, <&_bkts>; )

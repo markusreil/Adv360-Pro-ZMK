@@ -8,6 +8,7 @@ ZMK_MOD_MORPH(bsp_del,
 ZMK_TAP_DANCE(shift_caps,
     bindings = <&kp LSHFT>, <&kp CAPS>;
 )
+
 ZMK_TAP_DANCE(kp_tog,
-    bindings = <&mo 1>, <&tog 1>;
+    bindings = <&mo 2>, <&tog 2>;
 )

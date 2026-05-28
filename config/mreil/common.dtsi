@@ -1,3 +1,9 @@
+#define BASE 0
+#define NOMODS 1
+#define KEYPAD 2
+#define FN 3
+#define MOD 4
+
 //
 // Flip behavior when SHIFT is pressed / not pressed
 //
