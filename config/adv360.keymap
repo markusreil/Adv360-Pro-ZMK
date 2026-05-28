@@ -6,6 +6,10 @@
 #include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/pointing.h>
 
+// zmk-helpers
+#include "zmk-helpers/helper.h"
+#include "zmk-helpers/key-labels/adv360.h"
+
 / {
     behaviors {
       #include "macros.dtsi"
